@@ -3,23 +3,28 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  componentDidMount() {
+    fetch('https://cors-anywhere.herokuapp.com/https://api.piggy.co.in/v2/mf/search/',{
+      method: 'post',
+      headers: {
+        "authorization": "Token a41d2b39e3b47412504509bb5a1b66498fb1f43a",
+        "cache-control": "no-cache",
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        "search": "hdfc",
+        "rows": 2,
+	      "offset": 1
+      })
+    })
+    .then(res => res.json())
+    .then(res => console.log(res))
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        hello world
       </div>
     );
   }
