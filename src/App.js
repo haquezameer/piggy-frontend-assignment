@@ -40,7 +40,6 @@ class App extends Component {
   };
 
   handleChange = e => {
-    console.log(e.target.value);
     this.setState({ searchString: e.target.value });
   };
 

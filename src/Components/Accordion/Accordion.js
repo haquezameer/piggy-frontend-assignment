@@ -11,19 +11,13 @@ class Accordion extends Component {
   };
 
   setActiveItem = itemKey => {
-    console.log("id: " + itemKey);
     fetch(`https://api.piggy.co.in/v1/mf/?key=${itemKey}`)
       .then(res => res.json())
       .then(res =>
-        this.setState(
-          {
-            activeItemData: res.data.mutual_fund.details,
-            activeItem: itemKey
-          },
-          () => {
-            console.log(this.state.activeItemData);
-          }
-        )
+        this.setState({
+          activeItemData: res.data.mutual_fund.details,
+          activeItem: itemKey
+        })
       );
   };
 
@@ -33,7 +27,6 @@ class Accordion extends Component {
         <div>
           <button
             onClick={() => {
-              console.log(props);
               setActiveItem(props.itemKey);
             }}
             className="accordion-tab"
