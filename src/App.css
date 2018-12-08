@@ -1,31 +1,10 @@
 .App {
-  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 ul {
   list-style-type: none;
-}
-
-.hidden {
-  display: none;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
-}
-
-.active-panel {
-  display: block;
-  max-height: 100px;
-}
-
-.accordion-tab {
-  width: 300px;
-  background-color: #cccccc8a;
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
-}
-
-.accordion-tab:hover {
-  background-color: #ccc;
 }

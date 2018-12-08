@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./Accordion.css";
+
 const AccordionContext = React.createContext();
 
 class Accordion extends Component {
@@ -28,15 +30,17 @@ class Accordion extends Component {
   static Tab = props => (
     <AccordionContext.Consumer>
       {({ setActiveItem }) => (
-        <button
-          onClick={() => {
-            console.log(props);
-            setActiveItem(props.itemKey);
-          }}
-          className="accordion-tab"
-        >
-          {props.children}
-        </button>
+        <div>
+          <button
+            onClick={() => {
+              console.log(props);
+              setActiveItem(props.itemKey);
+            }}
+            className="accordion-tab"
+          >
+            {props.children}
+          </button>
+        </div>
       )}
     </AccordionContext.Consumer>
   );
@@ -73,7 +77,7 @@ class Accordion extends Component {
           setActiveItem: this.setActiveItem
         }}
       >
-        {this.props.children}
+        <div className="accordian">{this.props.children}</div>
       </AccordionContext.Provider>
     );
   }

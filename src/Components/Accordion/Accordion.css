@@ -1,0 +1,31 @@
+.accordian {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.active-panel {
+  display: block;
+  max-height: 100px;
+}
+
+.accordion-tab {
+  width: 80%;
+  background-color: #cccccc8a;
+  border: none;
+  padding: 1rem;
+  margin: 0.1rem 0;
+  cursor: pointer;
+}
+
+.accordion-tab:hover {
+  background-color: #ccc;
+}
