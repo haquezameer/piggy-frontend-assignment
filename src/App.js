@@ -35,10 +35,12 @@ class App extends Component {
     return (
       <div className="App">
         <Accordion>
-          {this.state.data.map((item, i) => (
-            <div key={i}>
-              <Accordion.Tab itemId={i}>{item.name}</Accordion.Tab>
-              <Accordion.Pane itemId={i}>{item.riskometer}</Accordion.Pane>
+          {this.state.data.map(item => (
+            <div key={item.scheme_key}>
+              <Accordion.Tab itemKey={item.scheme_key}>
+                {item.name}
+              </Accordion.Tab>
+              <Accordion.Pane itemKey={item.scheme_key} />
             </div>
           ))}
         </Accordion>
