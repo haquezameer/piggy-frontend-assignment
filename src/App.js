@@ -28,7 +28,7 @@ class App extends Component {
         },
         body: JSON.stringify({
           search: `${this.state.searchString}`,
-          rows: 2,
+          rows: 5,
           offset: 1
         })
       }
@@ -61,7 +61,7 @@ class App extends Component {
         />
         <BounceLoader
           sizeUnit={"px"}
-          size={150}
+          size={50}
           color={"#123abc"}
           loading={this.state.loading}
         />

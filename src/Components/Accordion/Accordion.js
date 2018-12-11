@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FontAwesome from "react-fontawesome";
 
 import "./Accordion.css";
 
@@ -10,29 +11,40 @@ class Accordion extends Component {
     activeItemData: null
   };
 
-  setActiveItem = itemKey => {
+  toggleActiveItem = itemKey => {
     fetch(`https://api.piggy.co.in/v1/mf/?key=${itemKey}`)
       .then(res => res.json())
       .then(res =>
         this.setState({
           activeItemData: res.data.mutual_fund.details,
-          activeItem: itemKey
+          activeItem: this.state.activeItem === itemKey ? -1 : itemKey
         })
       );
   };
 
   static Tab = props => (
     <AccordionContext.Consumer>
-      {({ setActiveItem }) => (
-        <div>
-          <button
-            onClick={() => {
-              setActiveItem(props.itemKey);
-            }}
-            className="accordion-tab"
-          >
+      {({ toggleActiveItem, activeItem }) => (
+        <div
+          onClick={() => {
+            toggleActiveItem(props.itemKey);
+          }}
+          className={
+            props.itemKey === activeItem
+              ? "accordion-tab accordion-tab-active"
+              : "accordion-tab"
+          }
+        >
+          <div style={{ width: "80%", textAlign: "left" }}>
             {props.children}
-          </button>
+          </div>
+          <div style={{ width: "15%", textAlign: "right" }}>
+            {props.itemKey === activeItem ? (
+              <FontAwesome name="chevron-up" />
+            ) : (
+              <FontAwesome name="chevron-down" />
+            )}
+          </div>
         </div>
       )}
     </AccordionContext.Consumer>
@@ -41,17 +53,47 @@ class Accordion extends Component {
   static Pane = props => (
     <AccordionContext.Consumer>
       {({ activeItem, activeItemData }) => (
-        <div className={activeItem === props.itemKey ? "active" : "hidden"}>
+        <div
+          className={activeItem === props.itemKey ? "active-panel" : "hidden"}
+        >
           {activeItemData !== null ? (
             <div>
-              <p>Name: {activeItemData.name}</p>
-              <p>Riskometer: {activeItemData.riskometer}</p>
-              <p>Minimum Subscription: {activeItemData.minimum_subscription}</p>
-              <p>Rating: {activeItemData.rating}</p>
-              <p>Category: {activeItemData.category}</p>
-              <p>Asset_aum: {activeItemData.asset_aum}</p>
-              <p>Return_3yr: {activeItemData.return_3yr}</p>
-              <p>Benchmark_Text: {activeItemData.benchmark_text}</p>
+              <p>
+                <span className="light-text">Name:</span>{" "}
+                <span className="heavy-text">{activeItemData.name}</span>
+              </p>
+              <p>
+                <span className="light-text">Riskometer:</span>{" "}
+                <span className="heavy-text">{activeItemData.riskometer}</span>
+              </p>
+              <p>
+                <span className="light-text">Minimum Subscription:</span>{" "}
+                <span className="heavy-text">
+                  {activeItemData.minimum_subscription}
+                </span>
+              </p>
+              <p>
+                <span className="light-text">Rating:</span>{" "}
+                <span className="heavy-text">{activeItemData.rating}</span>
+              </p>
+              <p>
+                <span className="light-text">Category:</span>{" "}
+                <span className="heavy-text">{activeItemData.category}</span>
+              </p>
+              <p>
+                <span className="light-text">Asset_aum:</span>{" "}
+                <span className="heavy-text">{activeItemData.asset_aum}</span>
+              </p>
+              <p>
+                <span className="light-text">Return_3yr: </span>
+                <span className="heavy-text">{activeItemData.return_3yr}</span>
+              </p>
+              <p>
+                <span className="light-text">Benchmark_Text: </span>
+                <span className="heavy-text">
+                  {activeItemData.benchmark_text}
+                </span>
+              </p>
             </div>
           ) : (
             "loading"
@@ -67,7 +109,7 @@ class Accordion extends Component {
         value={{
           activeItem: this.state.activeItem,
           activeItemData: this.state.activeItemData,
-          setActiveItem: this.setActiveItem
+          toggleActiveItem: this.toggleActiveItem
         }}
       >
         <div className="accordian">{this.props.children}</div>

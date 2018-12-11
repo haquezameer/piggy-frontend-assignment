@@ -1,8 +1,13 @@
 .accordian {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  text-align: center;
+  width: 80%;
+  /* text-align: center; */
+  font-size: 1.5rem;
+  overflow: hidden;
+  background-color: #253447;
+  color: #fff;
+  border-radius: 0.5rem;
 }
 
 .hidden {
@@ -14,18 +19,46 @@
 
 .active-panel {
   display: block;
-  max-height: 100px;
+  padding: 1rem;
 }
 
 .accordion-tab {
-  width: 80%;
-  background-color: #cccccc8a;
   border: none;
   padding: 1rem;
-  margin: 0.1rem 0;
+  border: 0.5px solid #1c2939;
+  background-color: #1c2939;
   cursor: pointer;
+  font-size: 1.5rem;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
 }
 
 .accordion-tab:hover {
-  background-color: #ccc;
+  background-color: #111f31;
+}
+
+.accordion-tab-active {
+  color: #27baff;
+}
+
+.light-text {
+  font-weight: 400;
+  opacity: 0.8;
+  margin-right: 1.5rem;
+}
+
+.heavy-text {
+  font-weight: 600;
+}
+
+@media screen and (max-width: 500px) {
+  .accordian {
+    width: 95%;
+    font-size: 1rem;
+  }
+
+  .accordion-tab {
+    font-size: 1rem;
+  }
 }
